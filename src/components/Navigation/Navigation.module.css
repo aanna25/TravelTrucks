@@ -1,0 +1,25 @@
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  width: 100%;
+}
+
+.navLink {
+  position: relative;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--main);
+  text-decoration: none;
+  padding: 24px 0;
+  transition: var(--animation);
+}
+
+.navLink:hover {
+  color: var(--button-hover);
+}
+
+.navLink.active {
+  color: var(--button-hover);
+}

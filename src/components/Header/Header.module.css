@@ -1,0 +1,15 @@
+.header {
+  background-color: var(--badges);
+  border-bottom: 1px solid var(--badges);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: var(--badges);
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 64px;
+}
