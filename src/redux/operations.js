@@ -25,12 +25,16 @@ export const fetchCampers = createAsyncThunk(
         params.append("form", filters.bodyType);
       }
 
+      // обрабока features
       if (filters.features && filters.features.length > 0) {
         filters.features.forEach((feature) => {
-          let mockApiFieldName = feature;
-          if (feature === "AC") mockApiFieldName = "airConditioner";
-          if (feature === "bathroom") mockApiFieldName = "toilet";
-          params.append(mockApiFieldName, "true");
+          // обрабка для transmission
+          if (feature === "transmission") {
+            params.append("transmission", "automatic");
+          } else {
+            // для решти (AC, kitchen, TV, bathroom)
+            params.append(feature, "true");
+          }
         });
       }
 

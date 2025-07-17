@@ -74,29 +74,36 @@
   white-space: nowrap;
 }
 
+.starIcon {
+  color: var(--rating);
+}
+
+.locationIcon {
+  color: var(var(--main));
+}
+
 .favoriteButton {
   background: none;
   border: none;
   cursor: pointer;
-  padding: 0;
+  padding: 5px;
+  transition: color 0.2s ease;
   display: flex;
-  align-items: center;
   justify-content: center;
-  width: 24px; /* розмір іконок */
-  height: 24px; /* розмір іконок */
-  color: var(--white); /* колір для лайка */
-  transition: color 0.3s ease;
+  align-items: center;
 }
 
-.favoriteButton.active {
-  color: var(--button); /* лайкнуте */
+.heartIcon {
+  font-size: 24px;
+  color: var(--main);
 }
 
-/* стиль для іконок потім */
-.favoriteButton svg {
-  width: 24px;
-  height: 24px;
-  fill: currentColor; /* колір предка */
+.favoriteButton.active .heartIcon {
+  color: var(--button);
+}
+
+.favoriteButton:hover .heartIcon {
+  color: var(--button-hover);
 }
 
 .meta {
@@ -104,7 +111,7 @@
   align-items: center;
   gap: 16px;
   font-size: 16px;
-  color: #475467;
+  color: var(--text);
 }
 
 .rating,
@@ -118,19 +125,6 @@
   text-decoration: underline;
   text-underline-offset: 3px;
 }
-
-/* стилі для іконок */
-/*
-.rating svg,
-.location svg {
-  width: 20px;
-  height: 20px;
-  fill: var(--rating);
-}
-.location svg {
-  fill: var(--text);
-}
-*/
 
 .description {
   font-size: 16px;

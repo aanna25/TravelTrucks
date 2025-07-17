@@ -6,7 +6,8 @@ import CamperCard from "../../components/CamperCard/CamperCard";
 import FilterPanel from "../../components/FilterPanel/FilterPanel";
 import style from "./CatalogPage.module.css";
 import {
-  selectCampers,
+  // selectCampers,
+  selectCampersWithFavorites,
   selectCampersLoading,
   selectCurrentPage,
   selectHasMore,
@@ -24,7 +25,7 @@ const CatalogPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const campers = useSelector(selectCampers);
+  const campers = useSelector(selectCampersWithFavorites);
   const loading = useSelector(selectCampersLoading);
   const page = useSelector(selectCurrentPage);
   const hasMore = useSelector(selectHasMore);

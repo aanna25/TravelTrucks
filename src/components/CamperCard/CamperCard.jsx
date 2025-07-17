@@ -1,7 +1,10 @@
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toggleFavorite } from "../../redux/campers/favoritesSlice";
-import styles from "./CamperCard.module.css";
+
+import { BsStarFill, BsMap } from "react-icons/bs";
+import { FaRegHeart, FaHeart } from "react-icons/fa";
+import style from "./CamperCard.module.css";
 
 const CamperCard = ({ camper }) => {
   const dispatch = useDispatch();
@@ -37,25 +40,25 @@ const CamperCard = ({ camper }) => {
   };
 
   return (
-    <div className={styles.card}>
-      <div className={styles.imageContainer}>
+    <div className={style.card}>
+      <div className={style.imageContainer}>
         <img
           src={camper.gallery?.[0]?.thumb || "/placeholder-camper.jpg"}
           alt={camper.name}
-          className={styles.image}
+          className={style.image}
         />
       </div>
 
-      <div className={styles.content}>
-        <div className={styles.header}>
-          <div className={styles.titleRow}>
-            <h3 className={styles.name}>{camper.name}</h3>
-            <div className={styles.priceAndFavorite}>
-              <span className={styles.price}>€{formatPrice(camper.price)}</span>
+      <div className={style.content}>
+        <div className={style.header}>
+          <div className={style.titleRow}>
+            <h3 className={style.name}>{camper.name}</h3>
+            <div className={style.priceAndFavorite}>
+              <span className={style.price}>€{formatPrice(camper.price)}</span>
               <button
                 type="button"
-                className={`${styles.favoriteButton} ${
-                  camper.isFavorite ? styles.active : ""
+                className={`${style.favoriteButton} ${
+                  camper.isFavorite ? style.active : ""
                 }`}
                 onClick={handleFavoriteToggle}
                 aria-label={
@@ -64,30 +67,34 @@ const CamperCard = ({ camper }) => {
                     : "Add to favorites"
                 }
               >
-                {/* <heartIcon /> */}
+                {camper.isFavorite ? (
+                  <FaHeart className={style.heartIcon} /> // заповнене серце, якшо true
+                ) : (
+                  <FaRegHeart className={style.heartIcon} /> // контур, якшо  false
+                )}
               </button>
             </div>
           </div>
 
-          <div className={styles.meta}>
-            <div className={styles.rating}>
-              {/* <StarIcon /> */}
-              <span className={styles.ratingText}>
+          <div className={style.meta}>
+            <div className={style.rating}>
+              <BsStarFill className={style.starIcon} />
+              <span className={style.ratingText}>
                 {camper.rating} ({camper.reviews?.length || 0} Reviews)
               </span>
             </div>
-            <div className={styles.location}>
-              {/* <locationIcon /> */}
+            <div className={style.location}>
+              <BsMap className={style.locationIcon} />
               <span>{camper.location}</span>
             </div>
           </div>
         </div>
 
-        <p className={styles.description}>{camper.description}</p>
+        <p className={style.description}>{camper.description}</p>
 
-        <div className={styles.features}>
+        <div className={style.features}>
           {getFeatures().map((feature, index) => (
-            <span key={index} className={styles.feature}>
+            <span key={index} className={style.feature}>
               {feature}
             </span>
           ))}
@@ -95,7 +102,7 @@ const CamperCard = ({ camper }) => {
 
         <button
           type="button"
-          className={styles.showMoreButton}
+          className={style.showMoreButton}
           onClick={handleShowMore}
         >
           Show more

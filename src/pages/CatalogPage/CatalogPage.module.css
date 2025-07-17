@@ -9,7 +9,6 @@
 .filterPanel {
   flex-shrink: 0;
   width: 360px;
-  /* додати: background-color: #f8f8f8; border-right: 1px solid #eee; padding: 20px; */
 }
 
 .content {
@@ -20,11 +19,11 @@
 }
 
 .cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+  display: flex;
+  flex-direction: column;
   gap: 32px;
   width: 100%;
-  justify-content: center;
+  max-width: 888px;
   margin-bottom: 40px;
 }
 
