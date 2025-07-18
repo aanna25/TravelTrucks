@@ -95,7 +95,11 @@ const CamperCard = ({ camper }) => {
             </span>
           ))}
         </div>
-        <button type="button" className={style.showMoreButton}>
+        <button
+          type="button"
+          className={style.showMoreButton}
+          onClick={handleShowMore}
+        >
           Show more
         </button>
       </div>
