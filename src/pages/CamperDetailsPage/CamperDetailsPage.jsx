@@ -9,6 +9,7 @@ import {
 } from "../../redux/selectors";
 
 import { BsStarFill, BsMap } from "react-icons/bs";
+import BookingForm from "../../components/BookingForm/BookingForm";
 import style from "./CamperDetailsPage.module.css";
 
 const CamperDetailsPage = () => {
@@ -86,45 +87,10 @@ const CamperDetailsPage = () => {
         <div className={style.outletContent}>
           <Outlet />
         </div>
-
-        <div className={style.bookingFormContainer}>
-          <h3 className={style.bookingFormTitle}>Book your campervan now</h3>
-          <p className={style.bookingFormSubtitle}>
-            Stay connected! We are always ready to help you.
-          </p>
-          <form className={style.bookingForm}>
-            <input
-              type="text"
-              placeholder="Name*"
-              className={style.formInput}
-              required
-            />
-            <input
-              type="email"
-              placeholder="Email*"
-              className={style.formInput}
-              required
-            />
-            <input
-              type="date"
-              placeholder="Booking date"
-              className={style.formInput}
-              required
-            />
-            <textarea
-              placeholder="Comment"
-              className={style.formTextarea}
-            ></textarea>
-            <button type="submit" className={style.formButton}>
-              Send
-            </button>
-          </form>
-        </div>
+        <BookingForm />
       </div>
     </div>
   );
 };
 
 export default CamperDetailsPage;
-
-// не забути закинути потім форму окремо

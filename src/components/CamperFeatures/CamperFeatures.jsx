@@ -2,12 +2,14 @@ import { useSelector } from "react-redux";
 import { selectCurrentCamper } from "../../redux/selectors";
 
 import { BsWind, BsCupHot, BsUiRadios } from "react-icons/bs";
-import { FaCarSide, FaGasPump } from "react-icons/fa";
-import { MdOutlineBathroom } from "react-icons/md";
+import { FaGasPump } from "react-icons/fa";
+import { MdOutlineGasMeter } from "react-icons/md";
 import { LuRefrigerator, LuMicrowave } from "react-icons/lu";
 import { HiOutlineTv } from "react-icons/hi2";
-import { GiWaterTank } from "react-icons/gi";
-import { PiEngineFill } from "react-icons/pi";
+import { IoWaterOutline } from "react-icons/io5";
+
+import { PiShower } from "react-icons/pi";
+import { BsBezier } from "react-icons/bs";
 
 import style from "./CamperFeatures.module.css";
 
@@ -42,18 +44,18 @@ const CamperFeatures = () => {
     { condition: AC, icon: BsWind, text: "AC" },
     {
       condition: transmission === "automatic",
-      icon: FaCarSide,
+      icon: BsBezier,
       text: "Automatic",
     },
-    { condition: engine === "petrol", icon: PiEngineFill, text: "Petrol" },
+    { condition: engine === "petrol", icon: FaGasPump, text: "Petrol" },
     { condition: kitchen, icon: BsCupHot, text: "Kitchen" },
     { condition: TV, icon: HiOutlineTv, text: "TV" },
     { condition: radio, icon: BsUiRadios, text: "Radio" },
     { condition: refrigerator, icon: LuRefrigerator, text: "Refrigerator" },
     { condition: microwave, icon: LuMicrowave, text: "Microwave" },
-    { condition: bathroom, icon: MdOutlineBathroom, text: "Bathroom" },
-    { condition: gas, icon: FaGasPump, text: "Gas" },
-    { condition: water, icon: GiWaterTank, text: "Water" },
+    { condition: bathroom, icon: PiShower, text: "Bathroom" },
+    { condition: gas, icon: MdOutlineGasMeter, text: "Gas" },
+    { condition: water, icon: IoWaterOutline, text: "Water" },
   ];
 
   return (

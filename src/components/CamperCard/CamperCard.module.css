@@ -1,3 +1,19 @@
+.starIcon,
+.locationIcon {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+  flex-shrink: 0;
+}
+
+.feature svg {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+  margin-right: 8px;
+  flex-shrink: 0;
+}
+
 .card {
   display: flex;
   align-items: center;
@@ -18,9 +34,6 @@
 }
 
 .imageContainer {
-  /* display: flex;
-  justify-content: center;
-  align-items: center; */
   flex-shrink: 0;
   width: 292px;
   height: 320px;
@@ -75,11 +88,11 @@
 }
 
 .starIcon {
-  color: var(--rating);
+  fill: var(--rating);
 }
 
 .locationIcon {
-  color: var(var(--main));
+  fill: var(--main);
 }
 
 .favoriteButton {

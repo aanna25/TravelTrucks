@@ -1,0 +1,77 @@
+.reviewsContainer {
+  margin-top: 24px;
+  width: 631px;
+  overflow: auto;
+}
+
+.noReviewsMessage {
+  font-size: 16px;
+  color: var(--text);
+  text-align: center;
+  padding: 20px;
+}
+
+.reviewsList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 44px;
+}
+
+.reviewerInfo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.avatarPlaceholder {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: var(--badges);
+  color: var(--button);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.nameAndRating {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.reviewerName {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--main);
+  margin: 0;
+}
+
+.starRating {
+  display: flex;
+  gap: 4px;
+}
+
+.filledStar {
+  color: var(--rating);
+  font-size: 18px;
+}
+
+.emptyStar {
+  color: var(--badges);
+  font-size: 18px;
+}
+
+.reviewComment {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--text);
+  margin-top: 0;
+}

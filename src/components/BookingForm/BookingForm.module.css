@@ -1,0 +1,70 @@
+.bookingFormContainer {
+  flex: 1;
+  padding: 44px;
+  border: 1px solid var(--gray-light);
+  border-radius: 10px;
+}
+
+.bookingFormTitle {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--main);
+  margin-bottom: 8px;
+}
+
+.bookingFormSubtitle {
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--gray);
+  margin-bottom: 24px;
+}
+
+.bookingForm {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.formInput,
+.formTextarea {
+  padding: 18px 18px;
+  background-color: var(--inputs);
+  border-radius: 12px;
+  border: none;
+  font-size: 16px;
+  font-weight: 400;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.formInput:focus,
+.formTextarea:focus {
+  outline: none;
+}
+
+.formTextarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.formButton {
+  padding: 16px 57px;
+  border-radius: 200px;
+  width: 166px;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+  cursor: pointer;
+  background-color: var(--button);
+  color: #fff;
+  border: none;
+  margin-top: 0;
+  transition: background-color 0.3s ease;
+}
+
+.formButton:hover {
+  background-color: var(--button-hover);
+}
+
+/* стилі для дейтпікер */

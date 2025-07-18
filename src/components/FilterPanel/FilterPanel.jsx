@@ -3,32 +3,25 @@ import { useDispatch, useSelector } from "react-redux";
 import { setFilters, resetFilters } from "../../redux/campers/campersSlice";
 import { selectFilters } from "../../redux/selectors";
 import { fetchCampers } from "../../redux/operations";
-import {
-  BsWind,
-  BsCupHot,
-  BsMap,
-  BsGrid1X2,
-  BsGrid,
-  BsGrid3X3Gap,
-} from "react-icons/bs";
-import { MdOutlineBathroom } from "react-icons/md";
-import { HiOutlineTv } from "react-icons/hi2";
-import { FaCarSide } from "react-icons/fa";
-
+import SvgIcon from "../SvgIcon/SvgIcon";
 import style from "./FilterPanel.module.css";
 
 const vehicleTypes = [
-  { value: "panel", label: "Van", icon: <BsGrid1X2 /> },
-  { value: "fully_integrated", label: "Full-Integrated", icon: <BsGrid /> },
-  { value: "alcove", label: "Alcove", icon: <BsGrid3X3Gap /> },
+  { value: "panel", label: "Van", iconId: "icon-van" },
+  {
+    value: "fully_integrated",
+    label: "Full-Integrated",
+    iconId: "icon-fully-integrated",
+  },
+  { value: "alcove", label: "Alcove", iconId: "icon-alcove" },
 ];
 
 const equipmentOptions = [
-  { value: "AC", label: "AC", icon: <BsWind /> },
-  { value: "transmission", label: "Automatic", icon: <FaCarSide /> },
-  { value: "kitchen", label: "Kitchen", icon: <BsCupHot /> },
-  { value: "TV", label: "TV", icon: <HiOutlineTv /> },
-  { value: "bathroom", label: "Bathroom", icon: <MdOutlineBathroom /> },
+  { value: "AC", label: "AC", iconId: "icon-ac" },
+  { value: "transmission", label: "Automatic", iconId: "icon-automatic" },
+  { value: "kitchen", label: "Kitchen", iconId: "icon-kitchen" },
+  { value: "TV", label: "TV", iconId: "icon-tv" },
+  { value: "bathroom", label: "Bathroom", iconId: "icon-shower" },
 ];
 
 const FilterPanel = ({ className }) => {
@@ -49,10 +42,6 @@ const FilterPanel = ({ className }) => {
   const handleLocationChange = (e) => {
     setLocation(e.target.value);
   };
-
-  // const handleBodyTypeChange = (e) => {
-  //   setBodyType(e.target.value);
-  // };
 
   const handleBodyTypeClick = (value) => {
     setBodyType((prevBodyType) => (prevBodyType === value ? "" : value));
@@ -102,7 +91,8 @@ const FilterPanel = ({ className }) => {
             Location
           </label>
           <div className={style.inputWrapper}>
-            <BsMap
+            <SvgIcon
+              iconId="icon-map"
               className={`${style.icon} ${location ? style.activeIcon : ""}`}
             />
             <input
@@ -138,7 +128,10 @@ const FilterPanel = ({ className }) => {
                     );
                   }}
                 >
-                  <span className={style.iconButtonIcon}>{option.icon}</span>
+                  <SvgIcon
+                    iconId={option.iconId}
+                    className={style.iconButtonIcon}
+                  />
                   <span className={style.iconButtonLabel}>{option.label}</span>
                 </button>
               );
@@ -160,7 +153,10 @@ const FilterPanel = ({ className }) => {
                   }`}
                   onClick={() => handleBodyTypeClick(type.value)}
                 >
-                  <span className={style.iconButtonIcon}>{type.icon}</span>
+                  <SvgIcon
+                    iconId={type.iconId}
+                    className={style.iconButtonIcon}
+                  />
                   <span className={style.iconButtonLabel}>{type.label}</span>
                 </button>
               );
