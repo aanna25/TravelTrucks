@@ -105,64 +105,70 @@ const FilterPanel = ({ className }) => {
             />
           </div>
         </div>
-        <label htmlFor="filters" className={style.label}>
-          Filters
-        </label>
-        <div className={style.filterGroup}>
-          <p className={style.subTitle}>Vehicle equipment</p>
-          <div className={style.iconButtonGroup}>
-            {equipmentOptions.map((option) => {
-              const isActive = features.includes(option.value);
-              return (
-                <button
-                  key={option.value}
-                  type="button"
-                  className={`${style.iconButton} ${
-                    isActive ? style.active : ""
-                  }`}
-                  onClick={() => {
-                    setFeatures((prev) =>
-                      isActive
-                        ? prev.filter((item) => item !== option.value)
-                        : [...prev, option.value]
-                    );
-                  }}
-                >
-                  <SvgIcon
-                    iconId={option.iconId}
-                    className={style.iconButtonIcon}
-                  />
-                  <span className={style.iconButtonLabel}>{option.label}</span>
-                </button>
-              );
-            })}
-          </div>
-        </div>
-        <div className={style.filterGroup}>
-          <p className={style.subTitle}>Vehicle type</p>
-          <div className={style.iconButtonGroup}>
-            {vehicleTypes.map((type) => {
-              const isActive = bodyType === type.value;
 
-              return (
-                <button
-                  key={type.value}
-                  type="button"
-                  className={`${style.iconButton} ${
-                    isActive ? style.active : ""
-                  }`}
-                  onClick={() => handleBodyTypeClick(type.value)}
-                >
-                  <SvgIcon
-                    iconId={type.iconId}
-                    className={style.iconButtonIcon}
-                  />
-                  <span className={style.iconButtonLabel}>{type.label}</span>
-                </button>
-              );
-            })}
+        <div className={style.filtersSection}>
+          <p className={style.title}>Filters</p>
+
+          <div className={style.filterGroup}>
+            <p className={style.subTitle}>Vehicle equipment</p>
+            <div className={style.iconButtonGroup}>
+              {equipmentOptions.map((option) => {
+                const isActive = features.includes(option.value);
+                return (
+                  <button
+                    key={option.value}
+                    type="button"
+                    className={`${style.iconButton} ${
+                      isActive ? style.active : ""
+                    }`}
+                    onClick={() => {
+                      setFeatures((prev) =>
+                        isActive
+                          ? prev.filter((item) => item !== option.value)
+                          : [...prev, option.value]
+                      );
+                    }}
+                  >
+                    <SvgIcon
+                      iconId={option.iconId}
+                      className={style.iconButtonIcon}
+                    />
+                    <span className={style.iconButtonLabel}>
+                      {option.label}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          <div className={style.filterGroup}>
+            <p className={style.subTitle}>Vehicle type</p>
+            <div className={style.iconButtonGroup}>
+              {vehicleTypes.map((type) => {
+                const isActive = bodyType === type.value;
+
+                return (
+                  <button
+                    key={type.value}
+                    type="button"
+                    className={`${style.iconButton} ${
+                      isActive ? style.active : ""
+                    }`}
+                    onClick={() => handleBodyTypeClick(type.value)}
+                  >
+                    <SvgIcon
+                      iconId={type.iconId}
+                      className={style.iconButtonIcon}
+                    />
+                    <span className={style.iconButtonLabel}>{type.label}</span>
+                  </button>
+                );
+              })}
+            </div>
           </div>
         </div>
+
         <div className={style.buttonWrap}>
           <button type="submit" className={style.searchButton}>
             Search

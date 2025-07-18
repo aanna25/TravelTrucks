@@ -33,6 +33,13 @@
   color: var(--main);
 }
 
+.filtersSection .title {
+  margin-bottom: 32px;
+  font-weight: 500;
+  font-size: 16px;
+  color: var(--text);
+}
+
 .subTitle {
   font-size: 20px;
   font-weight: 600;
