@@ -90,7 +90,7 @@ const CamperCard = ({ camper }) => {
         <div className={style.features}>
           {getFeatures().map((feature, index) => (
             <span key={index} className={style.feature}>
-              <SvgIcon iconId={feature.iconId} className={style.featureIcon} />{" "}
+              <SvgIcon iconId={feature.iconId} className={style.featureIcon} />
               {feature.name}
             </span>
           ))}

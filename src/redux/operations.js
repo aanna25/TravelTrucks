@@ -20,20 +20,34 @@ export const fetchCampers = createAsyncThunk(
       if (filters.location) {
         params.append("location", filters.location);
       }
-
+      const bodyTypeMapping = {
+        panel: "panelTruck",
+        fully_integrated: "fullyIntegrated",
+        alcove: "alcove",
+      };
       if (filters.bodyType) {
-        params.append("form", filters.bodyType);
+        const mappedBodyType =
+          bodyTypeMapping[filters.bodyType] || filters.bodyType;
+        params.append("form", mappedBodyType);
       }
 
-      // обрабока features
       if (filters.features && filters.features.length > 0) {
+        const validFeatures = [
+          "AC",
+          "kitchen",
+          "TV",
+          "bathroom",
+          "radio",
+          "refrigerator",
+          "microwave",
+          "gas",
+          "water",
+        ];
         filters.features.forEach((feature) => {
-          // обрабка для transmission
-          if (feature === "transmission") {
-            params.append("transmission", "automatic");
-          } else {
-            // для решти (AC, kitchen, TV, bathroom)
+          if (validFeatures.includes(feature)) {
             params.append(feature, "true");
+          } else if (feature === "transmission") {
+            // Transmission filtering is handled locally, ignored in API params
           }
         });
       }
@@ -41,7 +55,14 @@ export const fetchCampers = createAsyncThunk(
       const response = await api.get(`/campers?${params.toString()}`);
 
       const totalItems = response.data.total || 0;
-      const fetchedItems = response.data.items || [];
+      let fetchedItems = response.data.items || [];
+
+      // локальна фільтрація за transmission
+      if (filters.features && filters.features.includes("transmission")) {
+        fetchedItems = fetchedItems.filter(
+          (item) => item.transmission === "automatic"
+        );
+      }
 
       const hasMore = page * limit < totalItems;
 
@@ -52,10 +73,6 @@ export const fetchCampers = createAsyncThunk(
         total: totalItems,
       };
     } catch (error) {
-      console.error(
-        "Error fetching campers:",
-        error.response?.data || error.message
-      );
       return rejectWithValue(
         error.response?.data?.message || "Failed to fetch campers"
       );
