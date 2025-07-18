@@ -1,14 +1,15 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toggleFavorite } from "../../redux/campers/favoritesSlice";
 import { FaRegHeart, FaHeart } from "react-icons/fa";
 import SvgIcon from "../SvgIcon/SvgIcon";
-
 import style from "./CamperCard.module.css";
 
 const CamperCard = ({ camper }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const favoriteIds = useSelector((state) => state.favorites.favoriteIds);
+  const isFavorite = favoriteIds.includes(camper.id);
 
   const handleFavoriteToggle = (e) => {
     e.stopPropagation();
@@ -19,73 +20,28 @@ const CamperCard = ({ camper }) => {
     navigate(`/campers/${camper.id}`);
   };
 
-  const formatPrice = (price) => {
-    return `${price}.00`;
-  };
+  const formatPrice = (price) => `${price}.00`;
 
   const getFeatures = () => {
     const features = [];
-
-    if (camper.AC)
-      features.push({
-        name: "AC",
-        iconId: "icon-ac",
-        iconClass: "featureIcon",
-      });
+    if (camper.AC) features.push({ name: "AC", iconId: "icon-ac" });
     if (camper.kitchen)
-      features.push({
-        name: "Kitchen",
-        iconId: "icon-kitchen",
-        iconClass: "featureIcon",
-      });
-    if (camper.TV)
-      features.push({
-        name: "TV",
-        iconId: "icon-tv",
-        iconClass: "featureIcon",
-      });
+      features.push({ name: "Kitchen", iconId: "icon-kitchen" });
+    if (camper.TV) features.push({ name: "TV", iconId: "icon-tv" });
     if (camper.bathroom)
-      features.push({
-        name: "Bathroom",
-        iconId: "icon-shower",
-        iconClass: "featureIcon",
-      });
-    if (camper.radio)
-      features.push({
-        name: "Radio",
-        iconId: "icon-radio",
-        iconClass: "featureIcon",
-      });
+      features.push({ name: "Bathroom", iconId: "icon-shower" });
+    if (camper.radio) features.push({ name: "Radio", iconId: "icon-radio" });
     if (camper.refrigerator)
-      features.push({
-        name: "Refrigerator",
-        iconId: "icon-fridge",
-        iconClass: "featureIcon",
-      });
+      features.push({ name: "Refrigerator", iconId: "icon-fridge" });
     if (camper.microwave)
-      features.push({
-        name: "Microwave",
-        iconId: "icon-microwave",
-        iconClass: "featureIcon",
-      });
-    if (camper.gas)
-      features.push({
-        name: "Gas",
-        iconId: "icon-gas",
-        iconClass: "featureIcon",
-      });
-    if (camper.water)
-      features.push({
-        name: "Water",
-        iconId: "icon-water",
-        iconClass: "featureIcon",
-      });
-
+      features.push({ name: "Microwave", iconId: "icon-microwave" });
+    if (camper.gas) features.push({ name: "Gas", iconId: "icon-gas" });
+    if (camper.water) features.push({ name: "Water", iconId: "icon-water" });
     return features.slice(0, 6);
   };
 
   return (
-    <div className={style.card}>
+    <div className={style.card} onClick={handleShowMore}>
       <div className={style.imageContainer}>
         <img
           src={camper.gallery?.[0]?.thumb || "/placeholder-camper.jpg"}
@@ -93,7 +49,6 @@ const CamperCard = ({ camper }) => {
           className={style.image}
         />
       </div>
-
       <div className={style.content}>
         <div className={style.header}>
           <div className={style.titleRow}>
@@ -103,16 +58,14 @@ const CamperCard = ({ camper }) => {
               <button
                 type="button"
                 className={`${style.favoriteButton} ${
-                  camper.isFavorite ? style.active : ""
+                  isFavorite ? style.active : ""
                 }`}
                 onClick={handleFavoriteToggle}
                 aria-label={
-                  camper.isFavorite
-                    ? "Remove from favorites"
-                    : "Add to favorites"
+                  isFavorite ? "Remove from favorites" : "Add to favorites"
                 }
               >
-                {camper.isFavorite ? (
+                {isFavorite ? (
                   <FaHeart className={style.heartIcon} />
                 ) : (
                   <FaRegHeart className={style.heartIcon} />
@@ -120,7 +73,6 @@ const CamperCard = ({ camper }) => {
               </button>
             </div>
           </div>
-
           <div className={style.meta}>
             <div className={style.rating}>
               <SvgIcon iconId="icon-star" className={style.starIcon} />
@@ -134,26 +86,16 @@ const CamperCard = ({ camper }) => {
             </div>
           </div>
         </div>
-
         <p className={style.description}>{camper.description}</p>
-
         <div className={style.features}>
           {getFeatures().map((feature, index) => (
             <span key={index} className={style.feature}>
-              <SvgIcon
-                iconId={feature.iconId}
-                className={style[feature.iconClass]}
-              />
+              <SvgIcon iconId={feature.iconId} className={style.featureIcon} />{" "}
               {feature.name}
             </span>
           ))}
         </div>
-
-        <button
-          type="button"
-          className={style.showMoreButton}
-          onClick={handleShowMore}
-        >
+        <button type="button" className={style.showMoreButton}>
           Show more
         </button>
       </div>
