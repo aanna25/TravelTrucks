@@ -109,14 +109,15 @@
 .heartIcon {
   font-size: 24px;
   color: var(--main);
-}
-
-.favoriteButton.active .heartIcon {
-  color: var(--button);
+  transition: color 0.2s ease;
 }
 
 .favoriteButton:hover .heartIcon {
   color: var(--button-hover);
+}
+
+.favoriteButton.active .heartIcon {
+  color: var(--button);
 }
 
 .meta {

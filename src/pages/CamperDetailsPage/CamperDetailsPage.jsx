@@ -8,8 +8,9 @@ import {
   selectCampersError,
 } from "../../redux/selectors";
 
-import { BsStarFill, BsMap } from "react-icons/bs";
 import BookingForm from "../../components/BookingForm/BookingForm";
+import Loader from "../../components/Loader/Loader";
+import SvgIcon from "../../components/SvgIcon/SvgIcon";
 import style from "./CamperDetailsPage.module.css";
 
 const CamperDetailsPage = () => {
@@ -27,7 +28,9 @@ const CamperDetailsPage = () => {
 
   if (isLoading) {
     return (
-      <div className={style.loadingMessage}>Loading camper details...</div>
+      <div className={style.loadingContainer}>
+        <Loader />
+      </div>
     );
   }
 
@@ -51,11 +54,12 @@ const CamperDetailsPage = () => {
         <h1 className={style.name}>{name}</h1>
         <div className={style.ratingLocation}>
           <p className={style.rating}>
-            <BsStarFill className={style.starIcon} /> {rating} ({reviews.length}{" "}
-            Reviews)
+            <SvgIcon iconId="icon-star" className={style.starIcon} /> {rating} (
+            {reviews.length} Reviews)
           </p>
           <p className={style.location}>
-            <BsMap className={style.locationIcon} /> {location}
+            <SvgIcon iconId="icon-map" className={style.locationIcon} />{" "}
+            {location}
           </p>
         </div>
         <p className={style.price}>{formatPrice(price)}</p>

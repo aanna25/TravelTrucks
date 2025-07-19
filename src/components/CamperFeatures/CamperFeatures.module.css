@@ -1,11 +1,10 @@
 .featuresContainer {
-  margin-top: 24px;
   margin-bottom: 40px;
   background-color: var(--inputs);
-
   padding: 44px;
   border-radius: 10px;
   box-sizing: border-box;
+  flex: 1;
 }
 
 .featuresList,
@@ -16,7 +15,7 @@
   list-style: none;
   padding: 0;
   margin: 0;
-  margin-bottom: 100px;
+  margin-bottom: 60px;
 }
 
 .featureItem {
@@ -33,14 +32,43 @@
 }
 
 .featureIcon {
-  font-size: 20px;
-  color: var(--main);
+  width: 20px;
+  height: 20px;
+  fill: var(--main);
 }
 
 .detailsList {
   flex-direction: column;
-  gap: 16px;
+  /* gap: 16px; */
   margin-top: 24px;
+  margin-bottom: 0;
+}
+
+.detailItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  font-size: 16px;
+}
+
+.detailItem span:first-child {
+  color: var(--main);
+  font-weight: 400;
+}
+
+.detailItem span:last-child {
+  color: var(--main);
+  font-weight: 500;
+  text-align: right;
+}
+
+.sectionTitle {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--main);
+  margin: 0 0 24px 0;
+  position: relative;
 }
 
 .sectionTitle::after {
@@ -52,9 +80,10 @@
   margin-top: 24px;
 }
 
-.loadingMessage {
-  text-align: center;
-  font-size: 18px;
-  color: var(--text);
+.loadingContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
   padding: 20px;
 }

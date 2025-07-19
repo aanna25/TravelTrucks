@@ -1,8 +1,9 @@
 .bookingFormContainer {
-  flex: 1;
+  flex: 0.8;
   padding: 44px;
   border: 1px solid var(--gray-light);
   border-radius: 10px;
+  align-self: flex-start;
 }
 
 .bookingFormTitle {
@@ -22,7 +23,7 @@
 .bookingForm {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 14px;
 }
 
 .formInput,
@@ -45,6 +46,7 @@
 .formTextarea {
   min-height: 100px;
   resize: vertical;
+  margin-bottom: 24px;
 }
 
 .formButton {
@@ -59,7 +61,7 @@
   background-color: var(--button);
   color: #fff;
   border: none;
-  margin-top: 0;
+  margin: 0 auto;
   transition: background-color 0.3s ease;
 }
 
@@ -67,4 +69,6 @@
   background-color: var(--button-hover);
 }
 
-/* стилі для дейтпікер */
+.errorMessage {
+  color: var(--button);
+}

@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toggleFavorite } from "../../redux/campers/favoritesSlice";
-import { FaRegHeart, FaHeart } from "react-icons/fa";
+import { BsSuitHeart } from "react-icons/bs";
 import SvgIcon from "../SvgIcon/SvgIcon";
 import style from "./CamperCard.module.css";
 
@@ -65,11 +65,7 @@ const CamperCard = ({ camper }) => {
                   isFavorite ? "Remove from favorites" : "Add to favorites"
                 }
               >
-                {isFavorite ? (
-                  <FaHeart className={style.heartIcon} />
-                ) : (
-                  <FaRegHeart className={style.heartIcon} />
-                )}
+                <BsSuitHeart className={style.heartIcon} />
               </button>
             </div>
           </div>

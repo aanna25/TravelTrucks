@@ -17,21 +17,27 @@ export const fetchCampers = createAsyncThunk(
       params.append("page", page.toString());
       params.append("limit", limit.toString());
 
-      if (filters.location) {
-        params.append("location", filters.location);
+      if (filters.location && filters.location.trim()) {
+        params.append("location", filters.location.trim());
       }
+
       const bodyTypeMapping = {
         panel: "panelTruck",
         fully_integrated: "fullyIntegrated",
         alcove: "alcove",
       };
-      if (filters.bodyType) {
+
+      if (filters.bodyType && filters.bodyType.trim()) {
         const mappedBodyType =
           bodyTypeMapping[filters.bodyType] || filters.bodyType;
         params.append("form", mappedBodyType);
       }
 
-      if (filters.features && filters.features.length > 0) {
+      if (
+        filters.features &&
+        Array.isArray(filters.features) &&
+        filters.features.length > 0
+      ) {
         const validFeatures = [
           "AC",
           "kitchen",
@@ -43,24 +49,31 @@ export const fetchCampers = createAsyncThunk(
           "gas",
           "water",
         ];
+
         filters.features.forEach((feature) => {
           if (validFeatures.includes(feature)) {
             params.append(feature, "true");
-          } else if (feature === "transmission") {
-            // Transmission filtering is handled locally, ignored in API params
           }
         });
       }
 
       const response = await api.get(`/campers?${params.toString()}`);
 
-      const totalItems = response.data.total || 0;
-      let fetchedItems = response.data.items || [];
+      const responseData = response.data;
+      const totalItems = responseData?.total || 0;
+      let fetchedItems = responseData?.items || responseData || [];
 
-      // локальна фільтрація за transmission
-      if (filters.features && filters.features.includes("transmission")) {
+      if (!Array.isArray(fetchedItems)) {
+        fetchedItems = [];
+      }
+
+      if (
+        filters.features &&
+        Array.isArray(filters.features) &&
+        filters.features.includes("transmission")
+      ) {
         fetchedItems = fetchedItems.filter(
-          (item) => item.transmission === "automatic"
+          (item) => item?.transmission === "automatic"
         );
       }
 
@@ -74,7 +87,9 @@ export const fetchCampers = createAsyncThunk(
       };
     } catch (error) {
       return rejectWithValue(
-        error.response?.data?.message || "Failed to fetch campers"
+        error.response?.data?.message ||
+          error.message ||
+          "Failed to fetch campers"
       );
     }
   }
@@ -84,11 +99,17 @@ export const fetchCamperById = createAsyncThunk(
   "campers/fetchCamperById",
   async (id, { rejectWithValue }) => {
     try {
+      if (!id) {
+        throw new Error("Camper ID is required");
+      }
+
       const response = await api.get(`/campers/${id}`);
       return response.data;
     } catch (error) {
       return rejectWithValue(
-        error.response?.data?.message || "Failed to fetch camper details"
+        error.response?.data?.message ||
+          error.message ||
+          "Failed to fetch camper details"
       );
     }
   }
@@ -98,11 +119,17 @@ export const bookCamper = createAsyncThunk(
   "campers/bookCamper",
   async ({ camperId, bookingData }, { rejectWithValue }) => {
     try {
+      if (!camperId || !bookingData) {
+        throw new Error("Camper ID and booking data are required");
+      }
+
       const response = await api.post(`/campers/${camperId}/book`, bookingData);
       return response.data;
     } catch (error) {
       return rejectWithValue(
-        error.response?.data?.message || "Failed to book camper"
+        error.response?.data?.message ||
+          error.message ||
+          "Failed to book camper"
       );
     }
   }

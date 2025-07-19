@@ -1,23 +1,18 @@
 import { useSelector } from "react-redux";
 import { selectCurrentCamper } from "../../redux/selectors";
-
-import { BsWind, BsCupHot, BsUiRadios } from "react-icons/bs";
-import { FaGasPump } from "react-icons/fa";
-import { MdOutlineGasMeter } from "react-icons/md";
-import { LuRefrigerator, LuMicrowave } from "react-icons/lu";
-import { HiOutlineTv } from "react-icons/hi2";
-import { IoWaterOutline } from "react-icons/io5";
-
-import { PiShower } from "react-icons/pi";
-import { BsBezier } from "react-icons/bs";
-
+import SvgIcon from "../SvgIcon/SvgIcon";
+import Loader from "../Loader/Loader";
 import style from "./CamperFeatures.module.css";
 
 const CamperFeatures = () => {
   const camper = useSelector(selectCurrentCamper);
 
   if (!camper) {
-    return <div className={style.loadingMessage}>Loading...</div>;
+    return (
+      <div className={style.loadingContainer}>
+        <Loader />
+      </div>
+    );
   }
 
   const {
@@ -41,31 +36,39 @@ const CamperFeatures = () => {
   } = camper;
 
   const featuresToDisplay = [
-    { condition: AC, icon: BsWind, text: "AC" },
+    { condition: AC, iconId: "icon-ac", text: "AC" },
     {
       condition: transmission === "automatic",
-      icon: BsBezier,
+      iconId: "icon-automatic",
       text: "Automatic",
     },
-    { condition: engine === "petrol", icon: FaGasPump, text: "Petrol" },
-    { condition: kitchen, icon: BsCupHot, text: "Kitchen" },
-    { condition: TV, icon: HiOutlineTv, text: "TV" },
-    { condition: radio, icon: BsUiRadios, text: "Radio" },
-    { condition: refrigerator, icon: LuRefrigerator, text: "Refrigerator" },
-    { condition: microwave, icon: LuMicrowave, text: "Microwave" },
-    { condition: bathroom, icon: PiShower, text: "Bathroom" },
-    { condition: gas, icon: MdOutlineGasMeter, text: "Gas" },
-    { condition: water, icon: IoWaterOutline, text: "Water" },
+    {
+      condition: engine === "petrol",
+      iconId: "icon-petrol",
+      text: "Petrol",
+    },
+    { condition: kitchen, iconId: "icon-kitchen", text: "Kitchen" },
+    { condition: TV, iconId: "icon-tv", text: "TV" },
+    { condition: radio, iconId: "icon-radio", text: "Radio" },
+    { condition: refrigerator, iconId: "icon-fridge", text: "Refrigerator" },
+    { condition: microwave, iconId: "icon-microwave", text: "Microwave" },
+    { condition: bathroom, iconId: "icon-shower", text: "Bathroom" },
+    { condition: gas, iconId: "icon-gas", text: "Gas" },
+    { condition: water, iconId: "icon-water", text: "Water" },
   ];
 
   return (
     <div className={style.featuresContainer}>
       <ul className={style.featuresList}>
         {featuresToDisplay.map(
-          (feature, index) =>
+          (feature) =>
             feature.condition && (
-              <li key={index} className={style.featureItem}>
-                <feature.icon className={style.featureIcon} /> {feature.text}
+              <li key={feature.iconId} className={style.featureItem}>
+                <SvgIcon
+                  iconId={feature.iconId}
+                  className={style.featureIcon}
+                />
+                {feature.text}
               </li>
             )
         )}
@@ -73,12 +76,30 @@ const CamperFeatures = () => {
 
       <h3 className={style.sectionTitle}>Vehicle details</h3>
       <ul className={style.detailsList}>
-        <li className={style.detailItem}>Form: {form}</li>
-        <li className={style.detailItem}>Length: {length}</li>
-        <li className={style.detailItem}>Width: {width}</li>
-        <li className={style.detailItem}>Height: {height}</li>
-        <li className={style.detailItem}>Tank: {tank}</li>
-        <li className={style.detailItem}>Consumption: {consumption}</li>
+        <li key="form" className={style.detailItem}>
+          <span>Form</span>
+          <span>{form}</span>
+        </li>
+        <li key="length" className={style.detailItem}>
+          <span>Length</span>
+          <span>{length}</span>
+        </li>
+        <li key="width" className={style.detailItem}>
+          <span>Width</span>
+          <span>{width}</span>
+        </li>
+        <li key="height" className={style.detailItem}>
+          <span>Height</span>
+          <span>{height}</span>
+        </li>
+        <li key="tank" className={style.detailItem}>
+          <span>Tank</span>
+          <span>{tank}</span>
+        </li>
+        <li key="consumption" className={style.detailItem}>
+          <span>Consumption</span>
+          <span>{consumption}</span>
+        </li>
       </ul>
     </div>
   );
