@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setFilters } from "../../redux/campers/campersSlice";
+import { setFilters, resetFilters } from "../../redux/campers/campersSlice";
 import { selectFilters } from "../../redux/selectors";
 import { fetchCampers } from "../../redux/operations";
 import SvgIcon from "../SvgIcon/SvgIcon";
@@ -62,6 +62,20 @@ const FilterPanel = ({ className }) => {
         page: 1,
         limit: 4,
         filters: newFilters,
+      })
+    );
+  };
+
+  const handleReset = () => {
+    console.log("Resetting filters");
+    dispatch(resetFilters());
+
+    // скидуєм фільтри і завантажуєм кемпери без фільтрів
+    dispatch(
+      fetchCampers({
+        page: 1,
+        limit: 4,
+        filters: {},
       })
     );
   };
@@ -158,6 +172,13 @@ const FilterPanel = ({ className }) => {
         <div className={style.buttonWrap}>
           <button type="submit" className={style.searchButton}>
             Search
+          </button>
+          <button
+            type="button"
+            onClick={handleReset}
+            className={style.resetButton}
+          >
+            Reset
           </button>
         </div>
       </form>

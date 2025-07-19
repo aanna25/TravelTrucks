@@ -6,11 +6,23 @@
   flex-shrink: 0;
 }
 
+.feature {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: var(--badges);
+  padding: 8px 16px;
+  border-radius: 100px;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--main);
+  white-space: nowrap;
+}
+
 .feature svg {
   width: 20px;
   height: 20px;
   fill: currentColor;
-  margin-right: 8px;
   flex-shrink: 0;
 }
 
