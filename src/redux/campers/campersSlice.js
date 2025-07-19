@@ -10,6 +10,7 @@ const initialState = {
   page: 1,
   limit: 4,
   total: 0,
+  isEmpty: false,
   filters: {
     location: "",
     bodyType: "",
@@ -38,6 +39,7 @@ const campersSlice = createSlice({
       state.page = 1;
       state.hasMore = true;
       state.error = null;
+      state.isEmpty = false;
     },
     resetCurrentCamper: (state) => {
       state.currentCamper = null;
@@ -54,7 +56,7 @@ const campersSlice = createSlice({
       })
       .addCase(fetchCampers.fulfilled, (state, action) => {
         state.loading = false;
-        const { items, page, hasMore, total } = action.payload;
+        const { items, page, hasMore, total, isEmpty } = action.payload;
 
         if (page === 1) {
           state.items = items;
@@ -64,6 +66,7 @@ const campersSlice = createSlice({
         state.page = page;
         state.hasMore = hasMore;
         state.total = total;
+        state.isEmpty = isEmpty || false;
       })
       .addCase(fetchCampers.rejected, (state, action) => {
         state.loading = false;

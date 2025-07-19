@@ -86,6 +86,17 @@ export const fetchCampers = createAsyncThunk(
         total: totalItems,
       };
     } catch (error) {
+      // обробка 404 як пустий результат, а не як помилка
+      if (error.response?.status === 404) {
+        return {
+          items: [],
+          page,
+          hasMore: false,
+          total: 0,
+          isEmpty: true, // флаг що нема данихпо фільтрам
+        };
+      }
+
       return rejectWithValue(
         error.response?.data?.message ||
           error.message ||

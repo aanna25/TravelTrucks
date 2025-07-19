@@ -6,13 +6,13 @@ import CamperCard from "../../components/CamperCard/CamperCard";
 import FilterPanel from "../../components/FilterPanel/FilterPanel";
 import style from "./CatalogPage.module.css";
 import {
-  // selectCampers,
   selectCampersWithFavorites,
   selectCampersLoading,
   selectCurrentPage,
   selectHasMore,
   selectFavoriteIds,
   selectFilters,
+  selectIsEmpty,
 } from "../../redux/selectors";
 import { fetchCampers } from "../../redux/operations";
 import {
@@ -31,6 +31,7 @@ const CatalogPage = () => {
   const hasMore = useSelector(selectHasMore);
   const favorites = useSelector(selectFavoriteIds);
   const filters = useSelector(selectFilters);
+  const isEmpty = useSelector(selectIsEmpty);
 
   const prevFiltersRef = useRef(filters);
 
@@ -86,7 +87,9 @@ const CatalogPage = () => {
               ))
             : !loading && (
                 <p className={style.noResults}>
-                  No campers found matching your criteria.
+                  {isEmpty
+                    ? "No campers found matching your criteria. Try adjusting your filters."
+                    : "No campers available at the moment."}
                 </p>
               )}
         </div>

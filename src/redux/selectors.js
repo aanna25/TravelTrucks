@@ -9,6 +9,7 @@ export const selectCurrentPage = (state) => state.campers.page;
 export const selectLimit = (state) => state.campers.limit;
 export const selectTotal = (state) => state.campers.total;
 export const selectFilters = (state) => state.campers.filters;
+export const selectIsEmpty = (state) => state.campers.isEmpty;
 
 export const selectFavoriteIds = (state) => state.favorites.favoriteIds;
 
