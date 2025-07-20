@@ -3,7 +3,6 @@ import { selectCurrentCamper } from "../../redux/selectors";
 import { BsStarFill } from "react-icons/bs";
 import style from "./CamperReviews.module.css";
 
-// передаєм масив відгуків
 const CamperReviews = () => {
   const camper = useSelector(selectCurrentCamper);
 

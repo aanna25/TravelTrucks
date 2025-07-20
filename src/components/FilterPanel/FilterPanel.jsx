@@ -39,7 +39,9 @@ const FilterPanel = ({ className }) => {
   }, [currentFilters]);
 
   const handleLocationChange = (e) => {
-    setLocation(e.target.value);
+    const value = e.target.value;
+    const capitalizedValue = value.charAt(0).toUpperCase() + value.slice(1);
+    setLocation(capitalizedValue);
   };
 
   const handleBodyTypeClick = (value) => {
