@@ -1,7 +1,9 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
+import { useDispatch } from "react-redux";
+import { bookCamper } from "../../redux/operations";
 import * as Yup from "yup";
 import CustomDatePicker from "../CustomDatePicker/CustomDatePicker";
-// import "react-datepicker/dist/react-datepicker.css";
+import toast from "react-hot-toast";
 import style from "./BookingForm.module.css";
 
 const validationSchema = Yup.object({
@@ -18,32 +20,27 @@ const validationSchema = Yup.object({
   comment: Yup.string(),
 });
 
-const BookingForm = () => {
-  const initialValues = {
-    name: "",
-    email: "",
-    bookingDate: null,
-    comment: "",
-  };
+const BookingForm = ({ camperId }) => {
+  const dispatch = useDispatch();
 
-  const handleSubmit = (values, { setSubmitting, resetForm }) => {
-    const formData = {
-      name: values.name,
-      email: values.email,
-      bookingDate: values.bookingDate
-        ? values.bookingDate.toISOString().split("T")[0]
-        : "",
-      comment: values.comment,
-    };
+  const handleSubmit = async (values, { setSubmitting, resetForm }) => {
+    try {
+      const bookingData = {
+        name: values.name,
+        email: values.email,
+        bookingDate: values.bookingDate?.toISOString().split("T")[0],
+        comment: values.comment,
+      };
 
-    console.log("дані відправника:", formData);
+      await dispatch(bookCamper({ camperId, bookingData })).unwrap();
 
-    setTimeout(() => {
-      // чистим форму після відправки
       resetForm();
+      toast.success("Your application has been successfully sent!");
+    } catch {
+      toast.error("Failed to send application. Please try again.");
+    } finally {
       setSubmitting(false);
-      alert("ваша заявка успішно відправлена!"); // змінити потім на ізітост?
-    }, 100);
+    }
   };
 
   return (
@@ -53,7 +50,12 @@ const BookingForm = () => {
         Stay connected! We are always ready to help you.
       </p>
       <Formik
-        initialValues={initialValues}
+        initialValues={{
+          name: "",
+          email: "",
+          bookingDate: null,
+          comment: "",
+        }}
         validationSchema={validationSchema}
         onSubmit={handleSubmit}
       >
@@ -90,7 +92,6 @@ const BookingForm = () => {
               minDate={new Date()}
               showDisabledMonthNavigation
               isClearable
-              // calendarClassName={style.myCustomCalendar}
             />
             <ErrorMessage
               name="bookingDate"

@@ -1,8 +1,7 @@
 .catalog {
   display: flex;
-  padding: 64px; /* відступ по бокач */
-  gap: 64px; /* відступ між фільтрами і контентом */
-  max-width: 1440px;
+  padding: 64px;
+  gap: 64px;
   margin: 0 auto;
 }
 

@@ -42,7 +42,6 @@ const CamperDetailsPage = () => {
     return <div className={style.notFoundMessage}>Camper not found.</div>;
   }
 
-  //  деструктуризуєм напряму з camper
   const { name, price, rating, reviews, location, description, gallery } =
     camper;
 

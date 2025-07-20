@@ -1,5 +1,5 @@
 .homePageContainer {
-  height: 90svh;
+  height: 100svh;
   background-image: url("../../assets/Img/hero-img@1x-min.webp");
   background-repeat: no-repeat;
   background-position: center;
@@ -45,13 +45,11 @@
   z-index: 2;
   max-width: 1440px;
   margin: 0 auto;
-  /* padding: 0 20px; */
   width: 100%;
 }
 
 .heroTextWrapper {
   max-width: 600px;
-  /* margin-left: 64px; */
 }
 
 .heroTitle {

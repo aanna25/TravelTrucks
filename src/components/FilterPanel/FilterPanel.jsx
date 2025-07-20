@@ -28,7 +28,6 @@ const FilterPanel = ({ className }) => {
   const dispatch = useDispatch();
   const currentFilters = useSelector(selectFilters);
 
-  // локальний стан фільтрів
   const [location, setLocation] = useState(currentFilters.location || "");
   const [bodyType, setBodyType] = useState(currentFilters.bodyType || "");
   const [features, setFeatures] = useState(currentFilters.features || []);
@@ -51,12 +50,9 @@ const FilterPanel = ({ className }) => {
     e.preventDefault();
 
     const newFilters = { location, bodyType, features };
-    console.log("Submitting filters:", newFilters);
 
-    // оновлюєм фільтри в redux
     dispatch(setFilters(newFilters));
 
-    // потім завантажуєм кемпери з новими фільтрами
     dispatch(
       fetchCampers({
         page: 1,
@@ -67,10 +63,8 @@ const FilterPanel = ({ className }) => {
   };
 
   const handleReset = () => {
-    console.log("Resetting filters");
     dispatch(resetFilters());
 
-    // скидуєм фільтри і завантажуєм кемпери без фільтрів
     dispatch(
       fetchCampers({
         page: 1,

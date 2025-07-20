@@ -93,7 +93,7 @@ export const fetchCampers = createAsyncThunk(
           page,
           hasMore: false,
           total: 0,
-          isEmpty: true, // флаг що нема данихпо фільтрам
+          isEmpty: true, // флаг що нема даних по фільтрам
         };
       }
 
@@ -130,18 +130,17 @@ export const bookCamper = createAsyncThunk(
   "campers/bookCamper",
   async ({ camperId, bookingData }, { rejectWithValue }) => {
     try {
-      if (!camperId || !bookingData) {
-        throw new Error("Camper ID and booking data are required");
-      }
+      // імітація API виклику
+      await new Promise((resolve) => setTimeout(resolve, 1000));
 
-      const response = await api.post(`/campers/${camperId}/book`, bookingData);
-      return response.data;
-    } catch (error) {
-      return rejectWithValue(
-        error.response?.data?.message ||
-          error.message ||
-          "Failed to book camper"
-      );
+      return {
+        id: Date.now(),
+        camperId,
+        ...bookingData,
+        status: "confirmed",
+      };
+    } catch {
+      return rejectWithValue("Failed to book camper");
     }
   }
 );
