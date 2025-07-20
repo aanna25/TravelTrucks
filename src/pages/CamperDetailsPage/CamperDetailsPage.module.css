@@ -34,7 +34,6 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
-  /* padding-bottom: 15px; */
 }
 
 .name {
@@ -78,8 +77,6 @@
   color: var(--main);
   margin-top: 8px;
 }
-
-/* замінити грід */
 
 .gallery {
   display: grid;
