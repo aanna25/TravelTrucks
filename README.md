@@ -82,3 +82,7 @@ yarn start
 If you would like to contribute to this project, please fork the repository and submit a Pull Request.
 
 📱 [Live Demo](https://travel-trucks-chi-cyan.vercel.app/)
+
+🧑‍💻 **_Author_**
+
+🔗 [Anna Ponomarenko](https://github.com/aanna25)
