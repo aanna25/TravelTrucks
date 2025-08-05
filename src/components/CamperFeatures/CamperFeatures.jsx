@@ -53,7 +53,7 @@ const CamperFeatures = () => {
     { condition: refrigerator, iconId: "icon-fridge", text: "Refrigerator" },
     { condition: microwave, iconId: "icon-microwave", text: "Microwave" },
     { condition: bathroom, iconId: "icon-shower", text: "Bathroom" },
-    { condition: gas, iconId: "icon-gas", text: "Gas" },
+    { condition: gas, iconId: "icon-gas", text: "Gas", iconClass: "gasIcon" },
     { condition: water, iconId: "icon-water", text: "Water" },
   ];
 
@@ -66,7 +66,11 @@ const CamperFeatures = () => {
               <li key={feature.iconId} className={style.featureItem}>
                 <SvgIcon
                   iconId={feature.iconId}
-                  className={style.featureIcon}
+                  className={
+                    feature.iconClass
+                      ? style[feature.iconClass]
+                      : style.featureIcon
+                  }
                 />
                 {feature.text}
               </li>
